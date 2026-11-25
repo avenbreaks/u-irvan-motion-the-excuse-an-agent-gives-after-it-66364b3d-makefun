@@ -22,6 +22,10 @@ def main() -> None:
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(LINE)
+    # Round-trip check: what the judge reads must be exactly the line,
+    # byte for byte — no trailing newline, no extra whitespace.
+    with open("/output/entry.txt", encoding="utf-8") as f:
+        assert f.read() == LINE, "entry.txt does not match the line"
     print(LINE)
 
 
